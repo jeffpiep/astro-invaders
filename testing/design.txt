@@ -1,0 +1,166 @@
+aliens: use 1st and 3rd characters from four aliens (want four colors)
+	that means there's 4*8=32 bytes for each alien for total of 128 bytes.
+	total real set is 4 frames * 2 chars * 6 aliens * 8 bytes/char = 384 bytes. That's 2 lines of pur-256
+
+playfield:
+	aliens space in rows of 8 (maybe growing with each level?) across (that's 16 characters in ABABABABABABABAB pattern), blank line between rows
+	for 4 aliens, that's 7 lines total
+		
+	although takes up ram, easy to rotate character sets - could then easily use all four alien animation frames
+	
+	armada of aliens slides horizontally with either 4 or 8 count in fine scroll (depends on # of frames)
+	each fine scroll, update CHBAS to right frame
+	
+	could do coarse h-scroll either +/-2 chars or as much as surviving armade width allows. The latter takes some book keeping.
+	lines are 40 char's long in real game (allows full h-scroll of 1 alien across whole screen i guess)
+		
+	v-scroll is coarse only (and that's just like in the real game looking at DLIST)
+	real game DLIST uses lots of BLANK counts to make space instead of using 0's in the screen buffer
+	basically move 'BLANK 8' antic commands before or after the armada list to move it down (could move up, too in our game)
+
+	GR.0 screenram starts at 48192 $BC40 and DL at 48160
+	GR.1 screenram starts at 48512 $BD80 
+	GR.8 screenram starts at 41296 $A150 and DL at 41040 $A050
+	the 4-line text window is at 48992  $BF60
+	just put it in GR.8 and then replace everything
+
+	
+DLIST:
+
+here's space invaders  
+21  0900: x3   blank 7
+08  0903:      blank.i 8
+08  0904:      blank 8
+08  0905:      mode.h 6 @ 0417
+08  0908:      blank.i 8
+08  0909:      mode.h 6 @ 043F
+08  090C:      blank.i 8
+08  090D:      mode.h 6 @ 0467
+08  0910:      blank.i 8
+08  0911:      mode.h 6 @ 048F
+08  0914:      blank.i 8
+08  0915:      mode.h 6 @ 04B7
+08  0918:      blank.i 8
+08  0919:      mode.h 6 @ 04DF
+72  091C: x9   blank 8
+02  0925:      mode.i B @ 1A70
+02  0928:      mode.i B @ 1B2D
+05  092B:      blank 5
+08  092C:      mode 6 @ 0800
+08  092F:      mode.h 2
+  0930:      waitvbl 0900
+
+	see some notes right above
+	need 192 scan lines
+	start with 24 blank lines ($70 x 3)
+	that leaves 168 lines
+		each row of aliens is a GR.1 or 8 lines (mode $06 + hscroll $10 + load $40)
+		can do a $70 between rows for 8 additional lines
+		should keep score and lives at top or bottom
+			asteroids does in single gr.1 line with no labels
+			invaders does in gr.1 line with values and gr.0 line with labels
+	here goes:
+		3 x $70
+		$56 $BD80
+		$70
+		$56 $BDA8
+		$70
+		$56 $BDD0
+		$70
+		$56 $BDF8
+		$70
+		$56 $BE20
+		$70
+		$56 $BE48
+		$70
+		$70
+		$70
+		$70
+		$70
+		$70
+		$42 $BF60
+		$02
+		$02
+		$02
+		$41 $A050
+		
+		note: STORE lsb first
+		
+		\70\70\70\56\80\BD\70\56\A8\BD\70\56\D0\BD\70\56\F8\BD\70\56\20\BD\70\56\48\BD\70\70\70\70\70\70\70\70\70\42\60\BF\02\02\02\41\50\A0
+
+		lastest: new starting DLIST - make sure it's enough scan lines (24+192 = 216)
+		21 blank lines 	\60\60\60
+		 8 line of gr.2 \46\60\BF
+		11 blank lines 	\00\00\00\00\00\00\00\00\00\00\00
+		 8 line of gr.2 \56\80\BD
+		 8 blank lines	\70
+		 8 line of gr.2	\56\A8\BD
+		 8 blank lines	\70
+		 8 line of gr.2	\56\D0\BD
+		 8 blank lines	\70
+		 8 line of gr.2 \56\F8\BD
+		 8 blank lines  \70
+		 8 line of gr.2 \56\20\BE
+		 8 blank lines  \70
+		 8 line of gr.2 \56\48\BE
+		88 blank lines  \70\70\70\70\70\70\70\70\70\70\70
+		   return       \41\50\A0
+
+make a gap in 2020: new starting DLIST - make sure it's enough scan lines (24+192 = 216)
+		24 blank lines 	\70\70\70
+		 8 line of gr.2 \46\60\BF
+		 6 blank lines 	\00\00\00\00\00\00\
+		 8 line of gr.2 \56\80\BD
+		 8 blank lines	\70
+		 8 line of gr.2	\56\A8\BD
+		 8 blank lines	\70
+		 8 line of gr.2	\56\D0\BD
+		 8 blank lines	\70
+		 8 line of gr.2 \56\F8\BD
+		 8 blank lines  \70
+		 8 line of gr.2 \56\20\BE
+		 8 blank lines  \70
+		 8 line of gr.2 \56\48\BE
+		 8 blank lines  \70
+
+		 8 line of gr.2 \56\70\BE
+		 8 blank lines  \70
+		 8 line of gr.2 \56\98\BE
+		 8 blank lines  \70
+		 8 line of gr.2 \56\C0\BE
+		 
+		40 blank lines  \70\70\70\70\70
+		   return       \41\50\A0
+
+
+		
+horizontal scrolling
+	fill the playfield with 2 leading spaces: ?#6;"  \41\42\61\62\C1\C2\E1\E2\41\42\61\62\C1\C2\E1\E2"," "
+	with HSCROLL at 0, this puts the armada at far left
+	there are 16 values of HSCROLL 0-15 and 7 frames in a animation cycle, 0,2,4,6,4,2 
+		this doesn't really mesh, so could just have two seperate counters :0-15 and 0246420246420....
+		
+player missile
+	asteroids PMBASE is $1000
+	double line
+	ship is in $1200 region
+	different ship positions:	up	00 04 04 0E 0E 1F
+					1st rt	00 01 03 07 0F 03
+					45 deg	00 01 06 1E 0C 04 
+					nxt rt	00 01 3E 1C 18 00
+					right	00 20 38 3F 38 20
+					nxt	00 18 1C 3E 01 00
+					-45 deg	00 04 0C 1E 06 01
+					-67.5	00 03 0F 07 03 01
+					down	00 1F 0E 0E 04 04
+					-112.5	00 0C 0F 0E 0C 08
+					-135	00 04 06 0F 0C 10
+					-157.5	00 06 0E 1F 20 00
+					left	00 01 07 3F 07 01
+					157.5	00 20 1F 0E 06 00
+					135	00 10 0C 0F 06 04
+					112.5	00 08 0C 0E 0F 0C
+
+	\00\04\04\0E\0E\1F\00\01\03\07\0F\03\00\01\06\1E\0C\04\00\01\3E\1C\18\00\00\20\38\3F\38\20\00\18\1C\3E\01\00\00\04\0C\1E\06\01\00\03\0F\07\03\01\00\1F\0E\0E\04\04\00\0C\0F\0E\0C\08\00\04\06\0F\0C\10\00\06\0E\1F\20\00\00\01\07\3F\07\01\00\20\1F\0E\06\00\00\10\0C\0F\06\04\00\08\0C\0E\0F\0C
+	no leading zeros
+	A$="\04\04\0E\0E\1F\01\03\07\0F\03\01\06\1E\0C\04\01\3E\1C\18\00\20\38\3F\38\20\18\1C\3E\01\00\04\0C\1E\06\01\03\0F\07\03\01\1F\0E\0E\04\04\0C\0F\0E\0C\08\04\06\0F\0C\10\06\0E\1F\20\00\01\07\3F\07\01\20\1F\0E\06\00\10\0C\0F\06\04\08\0C\0E\0F\0C"
