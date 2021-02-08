@@ -7,9 +7,12 @@ Flying in your Asteroids space figher returning to Earth after some rock breakin
 
 Use the joystick to fly around the fleet (Asteroids style, complete with "flip" mode). Avoid collisions and maneuver for that perfect shot. The fire button engages the single-shot (Space Invader style) photon cannon to eliminate the alien invaders. Score the most points you can before using up your three lives.
 
+Play in Altirra as a stock Atari XL/XE machine with 64k. The [ATR disk image](https://github.com/jeffpiep/astro-invaders/releases/download/V1.0/astroinvaders.atr) is auto starting. 
+
 ## Atari TurboBASIC XL Asteroids and Space Invaders Mashup
 
-AstroInvaders (or Surround or Invaderoids) is a mash up of Asteroids and Space Invaders originally written in 2016. It was tweaked in 2020 during the pandemic to make it a bit more challenging to play. Finally, it was released in 2021 for the [2021 BASIC 10 Liners](https://gkanold.wixsite.com/homeputerium/rules2021) 2021 BASIC 10 Liners game competition in the Extreme 256 category. AstroInvaders was optimized using the [TBXL Parser](https://github.com/dmsc/tbxl-parser). 
+AstroInvaders (or Surround or Invaderoids) is a mash up of Asteroids and Space Invaders originally written in 2016. It was tweaked in 2020 during the pandemic to make it a bit more challenging to play. Finally, it was released in 2021 for the [2021 BASIC 10 Liners](https://gkanold.wixsite.com/homeputerium/rules2021) game competition in the Extreme 256 category. AstroInvaders was optimized using the [TBXL Parser](https://github.com/dmsc/tbxl-parser).
+
 
 
 
