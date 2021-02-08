@@ -13,6 +13,6 @@ Play in Altirra as a stock Atari XL/XE machine with 64k. The [ATR disk image](ht
 
 AstroInvaders (or Surround or Invaderoids) is a mash up of Asteroids and Space Invaders originally written in 2016. It was tweaked in 2020 during the pandemic to make it a bit more challenging to play. Finally, it was released in 2021 for the [2021 BASIC 10 Liners](https://gkanold.wixsite.com/homeputerium/rules2021) game competition in the Extreme 256 category.
 
-The [source code](https://raw.githubusercontent.com/jeffpiep/astro-invaders/master/submission/surround.txt) is in a CR-LF text file. It was optimized into an 10-line BASIC program in an ATASCII file by using the [TBXL Parser](https://github.com/dmsc/tbxl-parser). An [HTML listing](https://github.com/jeffpiep/astro-invaders/blob/master/submission/astroinvaders_reallisting.html) was generated using a real Atari 130XE and [FujiNet](https://fujinet.online/)'s HTML ATASCII printer emulator. 
+The [source code](https://raw.githubusercontent.com/jeffpiep/astro-invaders/master/submission/surround.txt) is in a CR-LF text file. It was optimized into an 10-line BASIC program in an ATASCII file by using the [TBXL Parser](https://github.com/dmsc/tbxl-parser). The longest line of the is 252 characters as determined by the memopad.exe ATASCII editor. An [HTML listing](https://github.com/jeffpiep/astro-invaders/blob/master/submission/astroinvaders_reallisting.html) was generated using a real Atari 130XE and [FujiNet](https://fujinet.online/)'s HTML ATASCII printer emulator. 
 
 
