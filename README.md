@@ -4,7 +4,7 @@
 
 Flying in your Asteroids space figher returning to Earth after some rock breaking in the asteroid belt, you have intercepted the Space Invaders in training maneuvers on their way to attack the Moon. You must destory the invading fleet to save the moon. 
 
-https://github.com/jeffpiep/astro-invaders/blob/master/submission/astroinvaders.png
+https://github.com/jeffpiep/astro-invaders/blob/master/submission/astroinvaders.png?raw=true
 
 Use the joystick to fly around the fleet (Asteroids style, complete with "flip" mode). Avoid collisions and maneuver for that perfect shot. The fire button engages the single-shot (Space Invader style) photon cannon to eliminate the alien invaders. Score the most points you can before using up your three lives.
 
