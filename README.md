@@ -15,4 +15,7 @@ AstroInvaders (or Surround or Invaderoids) is a mash up of Asteroids and Space I
 
 The [source code](https://raw.githubusercontent.com/jeffpiep/astro-invaders/master/submission/surround.txt) is in a CR-LF text file. It was optimized into an 10-line BASIC program in an ATASCII file by using the [TBXL Parser](https://github.com/dmsc/tbxl-parser). The longest line of the is 252 characters as determined by the memopad.exe ATASCII editor. An [HTML listing](https://github.com/jeffpiep/astro-invaders/blob/master/submission/astroinvaders_reallisting.html) was generated using a real Atari 130XE and [FujiNet](https://fujinet.online/)'s HTML ATASCII printer emulator. 
 
+The whole program can be seen in the following screen grab of MEMOPAD.EXE display with 128 column width:
+![listing](https://raw.githubusercontent.com/jeffpiep/astro-invaders/master/submission/complete_optimized_listing_128cols.png)
+
 
