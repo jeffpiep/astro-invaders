@@ -1,0 +1,5 @@
+Use the joystick to fly around the fleet (Asteroids style, complete with "flip" mode). Avoid collisions and maneuver for that perfect shot. The fire button engages the single-shot (Space Invader style) photon cannon
+to eliminate the alien invaders. Score the most points you can before using up your three lives.
+
+Play in Altirra as a stock Atari XL/XE machine with 64k. The [ATR diskimage]
+https://github.com/jeffpiep/astro-invaders/releases/download/V1.0/astroinvaders.atr) is auto starting. 
